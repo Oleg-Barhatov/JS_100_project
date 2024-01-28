@@ -9,6 +9,8 @@ const btnColor = document.querySelector('.input-color')
 const widthValue = document.querySelector('.slider_width')
 const heigthValue = document.querySelector('.slider_heigth')
 
+let painting = false
+
 width.addEventListener('input', () => {
 	widthValue.textContent = width.value
 })
@@ -22,17 +24,46 @@ btnCreate.addEventListener('click', () => {
 	let count = 0
 	for (let i = 0; i < heigth.value; i++) {
 		count += 2
-		let div = document.createElement('div')
-		div.classList.add('gridRow')
+		const row = document.createElement('div')
+		row.classList.add('gridRow')
 
 		for (let j = 0; j < width.value; j++) {
 			count += 2
-			let col = document.createElement('div')
-			col.classList.add('gridColumn')
-			div.appendChild(col)
+			const column = document.createElement('div')
+			column.classList.add('gridColumn')
+			column.setAttribute('id', `${count}`)
+			OnMouseMove(column)
+			OnMouseDown(column)
+			OnMouseUp(column)
+
+			row.appendChild(column)
 		}
-		grid.appendChild(div)
+		grid.appendChild(row)
 	}
 })
+
+function OnMouseDown(element) {
+	element.addEventListener('mousedown', () => {
+		painting = true
+		element.style.backgroundColor = btnColor.value
+	})
+}
+
+function OnMouseMove(element) {
+	element.addEventListener('mousemove', e => {
+		const idItem = document.elementFromPoint(e.clientX, e.clientY).id
+		const gridItem = document.querySelectorAll('.gridColumn')
+		gridItem.forEach(item => {
+			if (idItem === item.id && painting) {
+				item.style.backgroundColor = btnColor.value
+			}
+		})
+	})
+}
+function OnMouseUp(element) {
+	element.addEventListener('mouseup', () => {
+		painting = false
+	})
+}
 
 console.log(btnColor.value)
