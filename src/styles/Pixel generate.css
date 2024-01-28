@@ -1,0 +1,81 @@
+@import url(../vendor/normalize.css);
+
+body {
+	background-color: #00a779;
+}
+
+.wrapper {
+	background-color: #fff;
+	width: 80vmin;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+	padding: 40px 25px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.slider_label {
+	display: block;
+}
+
+.slider_heigth {
+	position: relative;
+	font-size: 22px;
+	bottom: 1px;
+}
+
+.slider_width {
+	position: relative;
+	font-size: 22px;
+	bottom: 1px;
+}
+
+.slider-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button {
+	border: none;
+	background-color: #00a779;
+	border-radius: 5px;
+	color: #fff;
+	padding: 7px;
+	cursor: pointer;
+}
+
+.input-color {
+	appearance: none;
+	border: none;
+	background: transparent;
+	width: 70px;
+	height: 40px;
+	cursor: pointer;
+	border-radius: 5px;
+	border: 2px solid #000;
+}
+
+.gridColumn {
+	height: 1.2em;
+	width: 1.2em;
+	border: 1px solid #8f8f8f;
+}
+
+.gridRow {
+	display: flex;
+}
+
+.grid {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
