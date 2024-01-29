@@ -11,6 +11,10 @@ const heigthValue = document.querySelector('.slider_heigth')
 
 let painting = false
 
+btnDelete.addEventListener('click', () => {
+	grid.textContent = ''
+})
+
 width.addEventListener('input', () => {
 	widthValue.textContent = width.value
 })
@@ -60,10 +64,9 @@ function OnMouseMove(element) {
 		})
 	})
 }
+
 function OnMouseUp(element) {
 	element.addEventListener('mouseup', () => {
 		painting = false
 	})
 }
-
-console.log(btnColor.value)
