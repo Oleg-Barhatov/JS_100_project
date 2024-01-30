@@ -46,7 +46,6 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
 let painting = false
-ctx.lineWidth = 3
 
 dataColor.forEach(item => {
 	const btnColor = document.createElement('button')
@@ -87,6 +86,9 @@ btnColorNode.forEach(item => {
 	})
 })
 
-lineWidth.addEventListener('click', () => {
+lineWidth.addEventListener('input', () => {
 	count.textContent = lineWidth.value
+	ctx.lineWidth = lineWidth.value
 })
+
+btnSave.addEventListener('click', () => {})
