@@ -40,10 +40,47 @@ const dataColor = [
 const btn = document.querySelector('.btn-container')
 const btnFiling = document.querySelector('.btn_filing')
 const btnSave = document.querySelector('.btn_save')
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d')
+
+let painting = false
+ctx.lineWidth = 3
 
 dataColor.forEach(item => {
 	const btnColor = document.createElement('button')
 	btnColor.classList.add('btnColor')
 	btnColor.style.backgroundColor = `${item.color}`
 	btn.append(btnColor)
+})
+
+canvas.addEventListener('mousemove', evt => {
+	const x = evt.offsetX
+	const y = evt.offsetY
+	if (!painting) {
+		ctx.beginPath()
+		ctx.moveTo(x, y)
+	} else {
+		ctx.lineTo(x, y)
+		ctx.stroke()
+	}
+})
+
+canvas.addEventListener('mousedown', evt => {
+	painting = true
+})
+
+canvas.addEventListener('mouseup', evt => {
+	painting = false
+})
+
+canvas.addEventListener('mouseleave', evt => {
+	painting = false
+})
+
+const btnColorNode = document.querySelectorAll('.btnColor')
+
+btnColorNode.forEach(item => {
+	item.addEventListener('click', () => {
+		ctx.strokeStyle = item.style.backgroundColor
+	})
 })
