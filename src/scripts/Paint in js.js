@@ -40,6 +40,8 @@ const dataColor = [
 const btn = document.querySelector('.btn-container')
 const btnFiling = document.querySelector('.btn_filing')
 const btnSave = document.querySelector('.btn_save')
+const lineWidth = document.querySelector('.lineWidth')
+const count = document.querySelector('.count')
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
@@ -83,4 +85,8 @@ btnColorNode.forEach(item => {
 	item.addEventListener('click', () => {
 		ctx.strokeStyle = item.style.backgroundColor
 	})
+})
+
+lineWidth.addEventListener('click', () => {
+	count.textContent = lineWidth.value
 })
