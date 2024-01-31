@@ -71,11 +71,11 @@ canvas.addEventListener('mousedown', evt => {
 })
 
 canvas.addEventListener('mouseup', evt => {
-	painting = false
+	stopPainting()
 })
 
 canvas.addEventListener('mouseleave', evt => {
-	painting = false
+	stopPainting()
 })
 
 const btnColorNode = document.querySelectorAll('.btnColor')
@@ -92,3 +92,17 @@ lineWidth.addEventListener('input', () => {
 })
 
 btnSave.addEventListener('click', () => {})
+
+btnFiling.addEventListener('click', () => {
+	renameButton(btnFiling)
+})
+
+function stopPainting() {
+	painting = false
+}
+
+function renameButton(btn) {
+	btn.textContent === 'Рисование'
+		? (btn.textContent = 'Заливка')
+		: (btn.textContent = 'Рисование')
+}
