@@ -46,11 +46,23 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
 let painting = false
+let filling = false
+const canvasWidth = 1000
+const canvasHeigth = 600
+
+canvas.width = canvasWidth
+canvas.height = canvasHeigth
+ctx.fillStyle = 'white'
+ctx.fillRect(0, 0, canvasWidth, canvasHeigth)
 
 dataColor.forEach(item => {
 	const btnColor = document.createElement('button')
 	btnColor.classList.add('btnColor')
 	btnColor.style.backgroundColor = `${item.color}`
+	btnColor.addEventListener('click', evt => {
+		ctx.strokeStyle = evt.target.style.backgroundColor
+		ctx.fillStyle = evt.target.style.backgroundColor
+	})
 	btn.append(btnColor)
 })
 
@@ -67,7 +79,11 @@ canvas.addEventListener('mousemove', evt => {
 })
 
 canvas.addEventListener('mousedown', evt => {
-	painting = true
+	if (!painting && !filling) {
+		painting = true
+	} else if (painting && filling) {
+		stopPainting()
+	}
 })
 
 canvas.addEventListener('mouseup', evt => {
@@ -78,12 +94,10 @@ canvas.addEventListener('mouseleave', evt => {
 	stopPainting()
 })
 
-const btnColorNode = document.querySelectorAll('.btnColor')
-
-btnColorNode.forEach(item => {
-	item.addEventListener('click', () => {
-		ctx.strokeStyle = item.style.backgroundColor
-	})
+canvas.addEventListener('click', () => {
+	if (filling) {
+		ctx.fillRect(0, 0, canvasWidth, canvasHeigth)
+	}
 })
 
 lineWidth.addEventListener('input', () => {
@@ -91,14 +105,30 @@ lineWidth.addEventListener('input', () => {
 	ctx.lineWidth = lineWidth.value
 })
 
-btnSave.addEventListener('click', () => {})
+btnSave.addEventListener('click', () => {
+	const imageUrl = canvas.toDataURL('image/jpeg')
+	const imageLink = document.createElement('a')
+	imageLink.href = imageUrl
+	imageLink.download = 'Paint.jpeg'
+	imageLink.click()
+})
 
 btnFiling.addEventListener('click', () => {
 	renameButton(btnFiling)
+	if (btnFiling.textContent === 'Рисование') {
+		filling = true
+		stopPainting()
+	} else {
+		stopFiling()
+	}
 })
 
 function stopPainting() {
 	painting = false
+}
+
+function stopFiling() {
+	filling = false
 }
 
 function renameButton(btn) {
